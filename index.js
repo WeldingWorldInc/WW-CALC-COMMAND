@@ -7,11 +7,11 @@ const readline = require('readline');
 const player = require('play-sound')(opts = {}); 
 const fs = require('fs');
 const path = require('path');
-const config = require('./config.json');
 
 // -----------------------------------------------------------------
 // 1. CONFIGURATION & ART
 // -----------------------------------------------------------------
+const MAIN_CALCULATOR_URL = 'https://ww-calc-42cbc.web.app';
 // Set padding to 0 for art so the wide globe fits
 const PADDING_SIZE = 2; 
 const PADDING = ' '.repeat(PADDING_SIZE);
@@ -289,7 +289,7 @@ async function runCalculator() {
 
   // 3. Launch
   const featureString = selections.join('&');
-  const finalUrl = `${config.MAIN_CALCULATOR_URL}/#${featureString}`;
+  const finalUrl = `${MAIN_CALCULATOR_URL}/#${featureString}`;
   console.log(pad(chalk.cyan(`\nSystem Fully Operational. Launching Interface...`)));
   await open(finalUrl);
 }
