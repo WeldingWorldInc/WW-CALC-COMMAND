@@ -7,11 +7,11 @@ const readline = require('readline');
 const player = require('play-sound')(opts = {}); 
 const fs = require('fs');
 const path = require('path');
+const config = require('./config.json');
 
 // -----------------------------------------------------------------
 // 1. CONFIGURATION & ART
 // -----------------------------------------------------------------
-const MAIN_CALCULATOR_URL = 'https://ww-calc-42cbc.web.app';
 // Set padding to 0 for art so the wide globe fits
 const PADDING_SIZE = 2; 
 const PADDING = ' '.repeat(PADDING_SIZE);
@@ -48,18 +48,14 @@ function getHighScore() {
       const data = fs.readFileSync(HIGHSCORE_FILE);
       return JSON.parse(data).bestTime;
     }
-  } catch (e) {
-    console.error("Failed to get high score:", e);
-  }
+  } catch (e) {}
   return Infinity;
 }
 
 function saveHighScore(time) {
   try {
     fs.writeFileSync(HIGHSCORE_FILE, JSON.stringify({ bestTime: time }));
-  } catch (e) {
-    console.error("Failed to save high score:", e);
-  }
+  } catch (e) {}
 }
 
 // --- THE ARTWORK ---
@@ -158,9 +154,7 @@ const myArt = globeArt + "\n" + weldingLogo;
 
 
 function playBeep() {
-  try { process.stdout.write('\x07'); } catch (e) {
-    console.error("Failed to play beep:", e);
-  }
+  try { process.stdout.write('\x07'); } catch (e) {}
 }
 
 // -----------------------------------------------------------------
@@ -295,7 +289,7 @@ async function runCalculator() {
 
   // 3. Launch
   const featureString = selections.join('&');
-  const finalUrl = `${MAIN_CALCULATOR_URL}/#${featureString}`;
+  const finalUrl = `${config.MAIN_CALCULATOR_URL}/#${featureString}`;
   console.log(pad(chalk.cyan(`\nSystem Fully Operational. Launching Interface...`)));
   await open(finalUrl);
 }
