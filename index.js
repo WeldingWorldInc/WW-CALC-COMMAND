@@ -48,14 +48,18 @@ function getHighScore() {
       const data = fs.readFileSync(HIGHSCORE_FILE);
       return JSON.parse(data).bestTime;
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error("Failed to get high score:", e);
+  }
   return Infinity;
 }
 
 function saveHighScore(time) {
   try {
     fs.writeFileSync(HIGHSCORE_FILE, JSON.stringify({ bestTime: time }));
-  } catch (e) {}
+  } catch (e) {
+    console.error("Failed to save high score:", e);
+  }
 }
 
 // --- THE ARTWORK ---
@@ -154,7 +158,9 @@ const myArt = globeArt + "\n" + weldingLogo;
 
 
 function playBeep() {
-  try { process.stdout.write('\x07'); } catch (e) {}
+  try { process.stdout.write('\x07'); } catch (e) {
+    console.error("Failed to play beep:", e);
+  }
 }
 
 // -----------------------------------------------------------------
