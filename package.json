@@ -7,7 +7,10 @@
     "ww-calc": "index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:win": "pkg . --targets node18-win-x64 --output builds/exe/ww-calc.exe",
+    "build:mac": "pkg . --targets node18-macos-x64 --output builds/mac/ww-calc",
+    "build": "npm run build:win && npm run build:mac"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,7 @@
     "chalk": "^4.1.2",
     "inquirer": "^8.2.7",
     "open": "^8.4.2",
-    "play-sound": "^1.1.6"
+    "play-sound": "^1.1.6",
+    "pkg": "^5.8.1"
   }
 }
